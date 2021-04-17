@@ -2,14 +2,14 @@
 #include "AccountList.h"
 
 int main() {
-    Account acc1(1, "Ivanov", "Ivan", "Ivanovich", 200.01);
-    Account acc2(2, "Sidorov", "Petr", "Petrovich", 30.59);
-    Account acc3(3, "Petrov", "Vladimir", "Romanovich", 150.97);
-    //acc1.increaseBalance(10.09);
-    //cout << acc1 << endl;
+    Account acc1("1", "Ivanov", "Ivan", "Ivanovich", 200.01);
+    Account acc2("2", "Sidorov", "Petr", "Petrovich", 30.59);
+    Account acc3("3", "Petrov", "Vladimir", "Romanovich", 150.97);
+    acc1.increaseBalance(10.09);
+    cout << acc1 << endl;
     //acc1.decreaseBalance(10.09);
     //cout << acc1 << endl;
-    //acc1.transaction(acc2, 20.56);
+    acc1.transaction(acc2, 20.56);
     //cout << acc1 << endl;
     //cout << acc2 << endl;
     //cout << acc1;

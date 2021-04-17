@@ -11,21 +11,40 @@
 
 using namespace std;
 
+//класс который содержит в себе список всех аккаунтов
 class AccountList {
-    vector<Account> accounts;
+    //вектор - список
+	vector<Account> accounts;
 
 public:
-    void addUser(const Account& account); //проверить ссылкой (подать на вход ссылку)
-    Account* searchByNumber(int number); //const
-    bool deleteUser(const Account& account);
-    Account& getFirstAccount();
-    Account& getLastAccount();
-    Account& operator [](int index);
-    bool exists(const Account& account);
-    int getSize();
-    //геттеры и сеттеры
-    friend ostream& operator <<(ostream& out, AccountList& accLst);
-    friend istream& operator >>(istream& in, AccountList& accLst);
+    //Метод добавления нового аккаунта в список всех аккаунтов
+	void addUser(const Account& account);
+
+    //Метод поиска аккаунта по его номеру
+	Account* searchByNumber(string number);
+
+	//Метод удаления аккаунта из списка всех аккаунтов
+	bool deleteUser(const Account& account);
+
+	//Метод получения первого аккаунта из списка
+	Account& getFirstAccount();
+
+	//Метод получения последнего аккаунта из списка
+	Account& getLastAccount();
+
+	//Перегрузка оператора индексации
+	Account& operator [](int index);
+
+	//Метод проверки на существование аккаунта
+	bool exists(const Account& account);
+
+	//Метод получения размера списка (количество аккаунтов)
+	int getSize() const;
+
+	//оператор вывода
+	friend ostream& operator <<(ostream& out, const AccountList& accLst);
+	//опратор ввода
+	friend istream& operator >>(istream& in, AccountList& accLst);
 };
 
 
