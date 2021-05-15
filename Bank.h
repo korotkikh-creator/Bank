@@ -40,6 +40,8 @@ public:
 	//метод перевода денег между счетами по их номерам
 	void transaction(string senderNumber, string receiveNumber, double sum);
 
+	int getCode();
+
 	//оператор вывода
 	friend ostream& operator << (ostream& out, const Bank& bank);
 

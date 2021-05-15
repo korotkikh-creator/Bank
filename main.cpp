@@ -2,6 +2,7 @@
 #include "AccountList.h"
 #include "Bank.h"
 #include "Repository.h"
+#include "Test.h"
 
 //функция создания аккаунта
 void createAccount(Bank& bank) {
@@ -38,6 +39,9 @@ void createAccount(Bank& bank) {
 
 int main() {
     setlocale(LC_ALL, "Russian");
+
+    TestAll();
+
     cout << "Do you want to upload a file or work with a new bank?" << endl;
 	cout << "Select the answer option you need by entering a number:\n1) Load bank from file\n2) Create a new bank" << endl;
 	int n;

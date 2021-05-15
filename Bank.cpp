@@ -65,3 +65,7 @@ istream& operator >> (istream& in, Bank& bank) {
 	return in >> bank.code >> bank.accounts;
 }
 
+int Bank::getCode() {
+    return this->code;
+}
+
