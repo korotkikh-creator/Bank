@@ -5,6 +5,9 @@
 
 using namespace std;
 
+//классы исключений
+
+//Пользователь уже ранее был зарегистрирован с таким номером
 class UserExistsException {
     string message;
 
@@ -18,6 +21,7 @@ public:
     }
 };
 
+//исключение пустого списка
 class EmptyListException {
     string message;
 
@@ -31,6 +35,7 @@ public:
     }
 };
 
+//выход за границы списка
 class IndexOfRangeException {
     string message;
 
@@ -44,6 +49,7 @@ public:
     }
 };
 
+//пользователь не найден
 class UserNotFoundException {
     string message;
 
@@ -57,6 +63,7 @@ public:
     }
 };
 
+//файл не найден
 class FileNotFoundException {
     string message;
 
@@ -70,6 +77,7 @@ public:
     }
 };
 
+//ошибка работы с файлом
 class FileErrorException {
     string message;
 
@@ -83,6 +91,7 @@ public:
     }
 };
 
+//баланса не достаточно для перевода
 class SumIsBiggerThanBalance {
     string message;
 
