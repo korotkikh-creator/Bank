@@ -13,34 +13,22 @@ void AccountList::addUser(const Account& account) {
 //Метод поиска аккаунта по его номеру
 //возвращает указатель(адрес) аккаунта
 Account* AccountList::searchByNumber(string number) {
-    //циклом проходим по всем аккаунтам из списка и
-    //если находим аккаунт с таким же номером как
-    //в аргументах то возвращаем ссылку(адрес) этого аккаунта
 	for (int i = 0; i < this->accounts.size(); i++) {
 		if (this->accounts[i].getNumber() == number)
-			return &this->accounts[i]; // & означает что возвращаем адрес
+			return &this->accounts[i];
 	}
-	//возвращается ключевое слово nullptr если такой аккаунт не найден в списке
 	return nullptr;
 }
 
 //Метод удаления аккаунта из списка всех аккаунтов
 bool AccountList::deleteUser(const Account& account) {
-    //Если список пуст то нечего удалять,
-    //генерируем ошибку что список пуст
 	if (this->accounts.size() == 0)
 		throw EmptyListException("The list is empty");
-	//находит аккаунт в списке всех аккаунтов
-	//делается функцией find из стандартной библиотеки
-	//возвращает итератор либо на конец списка если аккаунт не найден
-	//либо на тот аккаунт который нашли
 	vector<Account>::iterator it = find(this->accounts.begin(), this->accounts.end(), account);
-	//если вернулся итератор на конец то не нашли аккаунт возвращаем false
 	if (it == this->accounts.end())
 		return false;
 	//если нашли аккаунт то удаляем его из списка
 	this->accounts.erase(it);
-	//возвращаем true
 	return true;
 }
 
@@ -56,7 +44,6 @@ Account& AccountList::getLastAccount() {
 	return this->accounts[this->accounts.size() - 1];
 }
 
-//Перегрузка оператора индексации
 //на вход принимает индекс и возвращает
 //ссылку на аккаунт который находится по данному индексу
 Account& AccountList::operator[] (int index) {
