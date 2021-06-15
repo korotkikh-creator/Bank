@@ -1,21 +1,15 @@
 #include "AccountList.h" 
 
-//Метод добавления нового аккаунта в список всех аккаунтов
-void AccountList::addUser(const Account& account) {
-    //Проверяет нет ли аккаунта с таким же номером уже в списке всех аккаунтов
-    //если не равен nullptr то генерируем ошибку что такой аккаунт уще есть
-	if (searchByNumber(account.getNumber()) != nullptr)
+void AccountList::addUser(const Account& account) { //метод добавления нового аккаунта в список всех аккаунтов
+	if (searchByNumber(account.getNumber()) != nullptr) //проверка на существование аккаунта
 		throw UserExistsException("The user with this number is already added");
-	//если ошибки нет то добавляет аккаунт в список
 	this->accounts.push_back(account);
 }
 
-//Метод поиска аккаунта по его номеру
-//возвращает указатель(адрес) аккаунта
-Account* AccountList::searchByNumber(string number) {
+Account* AccountList::searchByNumber(string number) { //метод поиска аккаунта по номеру
 	for (int i = 0; i < this->accounts.size(); i++) {
 		if (this->accounts[i].getNumber() == number)
-			return &this->accounts[i];
+			return &this->accounts[i]; //возвращает указатель на аккаунт
 	}
 	return nullptr;
 }
