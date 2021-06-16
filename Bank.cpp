@@ -12,11 +12,11 @@ Bank::Bank(int code) {
 //получает на вход аругменты и создает аккаунта с этими данными и добавляет в список аккаунтов
 /**
  * создает новый аккаунт
- * @param number 
- * @param surname 
- * @param name 
- * @param middleName 
- * @param balance 
+ * @param number
+ * @param surname
+ * @param name
+ * @param middleName
+ * @param balance
  * @return acc
  */
 Account Bank::createNewAccount(string number, string surname, string name, string middleName, double balance) {
@@ -27,8 +27,8 @@ Account Bank::createNewAccount(string number, string surname, string name, strin
 
 //добавление аккаунта в список аккаунтов
 /**
- * 
- * @param account 
+ *
+ * @param account
  */
 void Bank::addAccount(const Account &account) {
     this->accounts.addUser(account);
@@ -36,14 +36,19 @@ void Bank::addAccount(const Account &account) {
 
 //удаление аккаунта из списка аккаунтов
 /**
- * 
- * @param account 
+ *
+ * @param account
  */
 void Bank::deleteAccount(const Account &account) {
     this->accounts.deleteUser(account);
 }
 
 //проверка на существование
+/**
+ * проверка на существование
+ * @param account
+ * @return true/false
+ */
 bool Bank::existsAccount(const Account &account) {
     return this->accounts.exists(account);
 }
@@ -56,9 +61,9 @@ Account *Bank::searchByNumber(string number) {
 //перевод по номеру
 /**
  * перевод по номеру
- * @param senderNumber 
- * @param receiveNumber 
- * @param sum 
+ * @param senderNumber
+ * @param receiveNumber
+ * @param sum
  */
 void Bank::transaction(string senderNumber, string receiveNumber, double sum) {
     //поиск аккаунта откуда перевод
@@ -82,9 +87,9 @@ void Bank::transaction(string senderNumber, string receiveNumber, double sum) {
 //
 /**
  * вывод в поток кода банка и списка его аккаунтов
- * @param out 
- * @param bank 
- * @return out 
+ * @param out
+ * @param bank
+ * @return out
  */
 ostream &operator<<(ostream &out, const Bank &bank) {
     return out << bank.code << endl << bank.accounts;
@@ -102,4 +107,3 @@ int Bank::getCode() {
 bool Bank::operator==(const Bank &bank) const {
     return this->code == bank.code && this->accounts == bank.accounts;
 }
-
