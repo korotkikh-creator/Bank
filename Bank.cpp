@@ -27,7 +27,7 @@ Account Bank::createNewAccount(string number, string surname, string name, strin
 
 //добавление аккаунта в список аккаунтов
 /**
- *
+ *добавление аккаунта в список аккаунтов
  * @param account
  */
 void Bank::addAccount(const Account &account) {
@@ -36,7 +36,7 @@ void Bank::addAccount(const Account &account) {
 
 //удаление аккаунта из списка аккаунтов
 /**
- *
+ *удаление аккаунта из списка аккаунтов
  * @param account
  */
 void Bank::deleteAccount(const Account &account) {
@@ -54,6 +54,11 @@ bool Bank::existsAccount(const Account &account) {
 }
 
 //поиск по номеру
+/**
+ * поиск по номеру
+ * @param number
+ * @return аккаунт
+ */
 Account *Bank::searchByNumber(string number) {
     return this->accounts.searchByNumber(number);
 }
@@ -96,6 +101,12 @@ ostream &operator<<(ostream &out, const Bank &bank) {
 }
 
 //ввод из потока кода и списка аккаунтов
+/**
+ * ввод из потока кода и списка аккаунтов
+ * @param in
+ * @param bank
+ * @return
+ */
 istream &operator>>(istream &in, Bank &bank) {
     return in >> bank.code >> bank.accounts;
 }
@@ -107,3 +118,4 @@ int Bank::getCode() {
 bool Bank::operator==(const Bank &bank) const {
     return this->code == bank.code && this->accounts == bank.accounts;
 }
+
