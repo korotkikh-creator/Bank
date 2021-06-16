@@ -10,6 +10,15 @@ Bank::Bank(int code) {
 }
 
 //получает на вход аругменты и создает аккаунта с этими данными и добавляет в список аккаунтов
+/**
+ * создает новый аккаунт
+ * @param number 
+ * @param surname 
+ * @param name 
+ * @param middleName 
+ * @param balance 
+ * @return acc
+ */
 Account Bank::createNewAccount(string number, string surname, string name, string middleName, double balance) {
     Account acc(number, surname, name, middleName, balance);
     this->accounts.addUser(acc);
@@ -17,11 +26,19 @@ Account Bank::createNewAccount(string number, string surname, string name, strin
 }
 
 //добавление аккаунта в список аккаунтов
+/**
+ * 
+ * @param account 
+ */
 void Bank::addAccount(const Account &account) {
     this->accounts.addUser(account);
 }
 
 //удаление аккаунта из списка аккаунтов
+/**
+ * 
+ * @param account 
+ */
 void Bank::deleteAccount(const Account &account) {
     this->accounts.deleteUser(account);
 }
@@ -37,6 +54,12 @@ Account *Bank::searchByNumber(string number) {
 }
 
 //перевод по номеру
+/**
+ * перевод по номеру
+ * @param senderNumber 
+ * @param receiveNumber 
+ * @param sum 
+ */
 void Bank::transaction(string senderNumber, string receiveNumber, double sum) {
     //поиск аккаунта откуда перевод
     Account *sender = this->accounts.searchByNumber(senderNumber);
@@ -56,7 +79,13 @@ void Bank::transaction(string senderNumber, string receiveNumber, double sum) {
     receiver->increaseBalance(sum);
 }
 
-//вывод в поток кода банка и списка его аккаунтов
+//
+/**
+ * вывод в поток кода банка и списка его аккаунтов
+ * @param out 
+ * @param bank 
+ * @return out 
+ */
 ostream &operator<<(ostream &out, const Bank &bank) {
     return out << bank.code << endl << bank.accounts;
 }
@@ -73,3 +102,4 @@ int Bank::getCode() {
 bool Bank::operator==(const Bank &bank) const {
     return this->code == bank.code && this->accounts == bank.accounts;
 }
+
