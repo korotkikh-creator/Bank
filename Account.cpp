@@ -3,17 +3,18 @@
 
 using namespace std;
 
-//реализация конструктора по умолчанию
 Account::Account() {
-    //обнуляем баланс чтобы компилятор не записал мусор
     this->balance = 0;
-    //остальные поля обнуляет компилятор сам
 }
 
-//реализация конструктора с параметрами
-//Принимаем на вход аргументы(в круглых скобках)
-//и присваиваем эти аргументы полям,
-//то есть их инициализируем(заполняем)
+/**
+ * Основная единица для работы с пользователем
+ * @param number
+ * @param surname
+ * @param name
+ * @param middleName
+ * @param balance
+ */
 Account::Account(string number, string surname, string name, string middleName, double balance) {
     this->number = number;
     this->surname = surname;
@@ -22,60 +23,82 @@ Account::Account(string number, string surname, string name, string middleName, 
     this->balance = balance;
 }
 
-//Реализация метода увеличения баланса на заданную величину в аргументах
+/**
+ * Реализация метода увеличения баланса на заданную величину в аргументах
+ * @param increase
+ */
 void Account::increaseBalance(double increase) {
-    //увеличиваем баланс на то значение которое передано в скобках
     this->balance += increase;
 }
 
-//Реализация метода уменьшения баланса на заданную величину в аргументах
+/**
+ * Реализация метода уменьшения баланса на заданную величину в аргументах
+ * @param decrease
+ */
 void Account::decreaseBalance(double decrease) {
     this->balance -= decrease;
 }
 
-//Реализация геттера
+/**
+ * Реализация геттера
+ * @return number
+ */
 string Account::getNumber() const {
-    //возвращает значение поля
     return this->number;
 }
 
-//Реализация сеттера
+/**
+ * Реализация сеттера
+ * @param number
+ */
 void Account::setNumber(string number) {
-    //аргумент присваиваем в поле
-    //меняем значение поля заданной величиной
     this->number = number;
 }
 
-//Реализация метода перевода денег
+/**
+ * Реализация метода перевода денег (транзакции)
+ * @param account
+ * @param sum
+ */
 void Account::transaction(Account &account, double sum) {
     if(this->balance < sum)
         throw SumIsBiggerThanBalance("Insufficient sum");
-    //у текущего аккаунта уменьшаем баланс
     this->decreaseBalance(sum);
-    //а у принимающего аккаунта увеличиваем баланс
     account.increaseBalance(sum);
 }
 
-//Реализация оператора сравнения на равенство
-//на вход в аргументах принимает второй объект
-//и возвращает true если текущий объект
-//по всем полям совпадает со вторым
+/**
+ * Реализация оператора сравнения аккаунтов
+ * @param account
+ * @return true/false
+ */
 bool Account::operator==(const Account &account) const {
     return this->number == account.number && this->surname == account.surname && this->name == account.name
            && this->middleName == account.middleName && this->balance == account.balance;
 }
 
+/**
+ * Получение баланса аккаунта
+ * @return balance
+ */
 double Account::getBalance() const {
     return this->balance;
 }
 
+/**
+ * Перезаписывает баланс
+ * @param balance
+ */
 void Account::setBalance(double balance) {
     this->balance = balance;
 }
 
-//реализация оператора вывода
-//на вход принимает поток куда вывести и аккаунт,
-//который выводится в поток
+/**
+ * Реализация потока вывода
+ * @param os
+ * @param account
+ * @return os
+ */
 ostream &operator<<(ostream &os, const Account &account) {
     return os << account.number << " " << account.surname << " " << account.name << " " << account.middleName << " "
               << account.balance;
@@ -83,6 +106,13 @@ ostream &operator<<(ostream &os, const Account &account) {
 
 //реализация оператора ввода
 //на вход принимает поток откуда вводится аккаунт,
+
+/**
+ * Реализация потока ввода
+ * @param in
+ * @param account
+ * @return in
+ */
 istream &operator>>(istream &in, Account &account) {
     return in >> account.number >> account.surname >> account.name >> account.middleName >> account.balance;
 }

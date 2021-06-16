@@ -1,9 +1,8 @@
-#include "AccountList.h" 
+#include "AccountList.hpp"
+using namespace std;
 
 //Метод добавления нового аккаунта в список всех аккаунтов
 void AccountList::addUser(const Account& account) {
-    //Проверяет нет ли аккаунта с таким же номером уже в списке всех аккаунтов
-    //если не равен nullptr то генерируем ошибку что такой аккаунт уще есть
 	if (searchByNumber(account.getNumber()) != nullptr)
 		throw UserExistsException("The user with this number is already added");
 	//если ошибки нет то добавляет аккаунт в список
@@ -13,12 +12,9 @@ void AccountList::addUser(const Account& account) {
 //Метод поиска аккаунта по его номеру
 //возвращает указатель(адрес) аккаунта
 Account* AccountList::searchByNumber(string number) {
-    //циклом проходим по всем аккаунтам из списка и
-    //если находим аккаунт с таким же номером как
-    //в аргументах то возвращаем ссылку(адрес) этого аккаунта
 	for (int i = 0; i < this->accounts.size(); i++) {
 		if (this->accounts[i].getNumber() == number)
-			return &this->accounts[i]; // & означает что возвращаем адрес
+			return &this->accounts[i]; //
 	}
 	//возвращается ключевое слово nullptr если такой аккаунт не найден в списке
 	return nullptr;
