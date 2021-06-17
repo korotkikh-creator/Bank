@@ -3,9 +3,9 @@
 
 #include <iostream>
 
-//классы исключений
-
-//Пользователь уже ранее был зарегистрирован с таким номером
+/**
+ * Пользователь уже ранее был зарегистрирован с таким номером
+ */
 class UserExistsException : std::exception{
     std::string message;
 
@@ -19,7 +19,9 @@ public:
     }
 };
 
-//исключение пустого списка
+/**
+ * исключение пустого списка
+ */
 class EmptyListException : std::exception{
     std::string message;
 
@@ -33,7 +35,9 @@ public:
     }
 };
 
-//выход за границы списка
+/**
+ * выход за границы списка
+ */
 class IndexOfRangeException : std::exception{
     std::string message;
 
@@ -47,7 +51,9 @@ public:
     }
 };
 
-//пользователь не найден
+/**
+ * выход за границы списка
+ */
 class UserNotFoundException : std::exception{
     std::string message;
 
@@ -61,7 +67,9 @@ public:
     }
 };
 
-//файл не найден
+/**
+ * файл не найден
+ */
 class FileNotFoundException : std::exception{
     std::string message;
 
@@ -75,7 +83,9 @@ public:
     }
 };
 
-//ошибка работы с файлом
+/**
+ * ошибка работы с файлом
+ */
 class FileErrorException : std::exception{
     std::string message;
 
@@ -89,7 +99,9 @@ public:
     }
 };
 
-//баланса не достаточно для перевода
+/**
+ * баланса не достаточно для перевода
+ */
 class SumIsBiggerThanBalance : std::exception{
     std::string message;
 
