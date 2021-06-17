@@ -1,100 +1,131 @@
 #include "AccountList.hpp"
 using namespace std;
 
-//Метод добавления нового аккаунта в список всех аккаунтов
+/**
+ * Метод добавления нового аккаунта в список всех аккаунтов
+ * @param account
+ * @throws UserExistsException если указатель не указывает в пустоту при поиске searchByNumber
+ */
 void AccountList::addUser(const Account& account) {
 	if (searchByNumber(account.getNumber()) != nullptr)
 		throw UserExistsException("The user with this number is already added");
-	//если ошибки нет то добавляет аккаунт в список
 	this->accounts.push_back(account);
 }
 
-//Метод поиска аккаунта по его номеру
-//возвращает указатель(адрес) аккаунта
+/**
+ * Метод поиска аккаунта по его номеру
+ * @param number
+ * @return указатель на аккаунт
+ */
 Account* AccountList::searchByNumber(string number) {
 	for (int i = 0; i < this->accounts.size(); i++) {
 		if (this->accounts[i].getNumber() == number)
-			return &this->accounts[i]; //
+			return &this->accounts[i];
 	}
-	//возвращается ключевое слово nullptr если такой аккаунт не найден в списке
 	return nullptr;
 }
 
-//Метод удаления аккаунта из списка всех аккаунтов
+/**
+ * Метод удаления аккаунта из списка всех аккаунтов
+ * @param account
+ * @return true/false
+ * @throws EmptyListException если размер списка аккаунтов равен 0
+ */
 bool AccountList::deleteUser(const Account& account) {
-    //Если список пуст то нечего удалять,
-    //генерируем ошибку что список пуст
 	if (this->accounts.size() == 0)
 		throw EmptyListException("The list is empty");
-	//находит аккаунт в списке всех аккаунтов
-	//делается функцией find из стандартной библиотеки
-	//возвращает итератор либо на конец списка если аккаунт не найден
-	//либо на тот аккаунт который нашли
 	vector<Account>::iterator it = find(this->accounts.begin(), this->accounts.end(), account);
-	//если вернулся итератор на конец то не нашли аккаунт возвращаем false
 	if (it == this->accounts.end())
 		return false;
-	//если нашли аккаунт то удаляем его из списка
 	this->accounts.erase(it);
-	//возвращаем true
 	return true;
 }
 
+/**
+ * Для получения начального элемента в списке
+ * @return указатель this
+ */
 Account& AccountList::getFirstAccount() {
 	if (this->accounts.size() == 0)
 		throw EmptyListException("The list is empty");
 	return this->accounts[0];
 }
 
+/**
+ * Для получения последнего элемента в списке
+ * @return указатель this
+ */
 Account& AccountList::getLastAccount() {
 	if (this->accounts.size() == 0)
 		throw EmptyListException("The list is empty");
 	return this->accounts[this->accounts.size() - 1];
 }
 
-//Перегрузка оператора индексации
-//на вход принимает индекс и возвращает
-//ссылку на аккаунт который находится по данному индексу
+/**
+ * Перегрузка оператора индексации
+ * @param index
+ * @return account[index]
+ */
 Account& AccountList::operator[] (int index) {
-    //проверка на то чтобы индекс не выходил за пределы списка
 	if (index < 0 || index >= this->accounts.size())
 		throw IndexOfRangeException("Wrong index");
-	//возврат ссылки на аккаунт из списка аккаунтов по индексу
 	return this->accounts[index];
 }
 
+/**
+ * Проверка на существование аккаунта в списке аккаунтов
+ * @param account
+ * @return true/false
+ */
 bool AccountList::exists(const Account& account) {
-    //циклом проходим по списку всех аккаунтов и возвращаем true
-    //если данный аккаунт найден в списке
 	for (int i = 0; i < this->accounts.size(); i++) {
 		if (this->accounts[i] == account)
 			return true;
 	}
-	//если в списке не нашли такого аккаунта то возвращаем false
 	return false;
 }
 
+/**
+ * Метод определения размера списка аккаунтов
+ * @return accounts.size()
+ * @throws EmptyListException если размер списка аккаунтов равен 0
+ */
 int AccountList::getSize() const {
-    //если количество равно 0 то бросается исключение EmptyListException
 	if (this->accounts.size() == 0)
 		throw EmptyListException("The list is empty");
-	//если не равно 0 то возвращается размер
 	return this->accounts.size();
 }
 
-//ostream поток на вывод
+/**
+ * ostream поток на вывод
+ * @param out
+ * @param accLst
+ * @return out
+ */
 ostream& operator <<(ostream& out, const AccountList& accLst) {
-    //выводим все аккаунты каждое с новой строки
 	for (int i = 0; i < accLst.getSize(); i++)
 		out << accLst.accounts[i] << "\n";
 	return out;
 }
 
-//istream поток на ввод
+/**
+ * istream поток на ввод
+ * @param in
+ * @param accLst
+ * @return in
+ */
 istream& operator >>(istream& in, AccountList& accLst) {
-    //вводим акаунты и добавляем их в список пока не конец потока
 	Account acc;
 	while (in >> acc)
 		accLst.addUser(acc);
 	return in;
+}
+
+/**
+ * Оператор сравнения для AccountList
+ * @param accountList
+ * @return true/false
+ */
+bool AccountList::operator==(const AccountList& accountList) const {
+    return this->accounts == accountList.accounts;
 }
