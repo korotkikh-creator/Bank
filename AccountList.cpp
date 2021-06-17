@@ -44,6 +44,7 @@ bool AccountList::deleteUser(const Account& account) {
 /**
  * Для получения начального элемента в списке
  * @return указатель this
+ * @throws EmptyListException если размер списка аккаунтов равен 0
  */
 Account& AccountList::getFirstAccount() {
 	if (this->accounts.size() == 0)
@@ -54,6 +55,7 @@ Account& AccountList::getFirstAccount() {
 /**
  * Для получения последнего элемента в списке
  * @return указатель this
+ * @throws EmptyListException если размер списка аккаунтов равен 0
  */
 Account& AccountList::getLastAccount() {
 	if (this->accounts.size() == 0)
@@ -65,6 +67,7 @@ Account& AccountList::getLastAccount() {
  * Перегрузка оператора индексации
  * @param index
  * @return account[index]
+ * @throws IndexOfRangeException если индекс вышел за пределы индексации массива
  */
 Account& AccountList::operator[] (int index) {
 	if (index < 0 || index >= this->accounts.size())
