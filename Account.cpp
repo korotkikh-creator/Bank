@@ -59,6 +59,7 @@ void Account::setNumber(string number) {
  * Реализация метода перевода денег (транзакции)
  * @param account
  * @param sum
+ * @throws SumIsBiggerThanBalance если sum > текущего баланса у отправителя
  */
 void Account::transaction(Account &account, double sum) {
     if(this->balance < sum)
@@ -79,7 +80,7 @@ bool Account::operator==(const Account &account) const {
 
 /**
  * Получение баланса аккаунта
- * @return balance
+ * @return double balance
  */
 double Account::getBalance() const {
     return this->balance;
@@ -103,9 +104,6 @@ ostream &operator<<(ostream &os, const Account &account) {
     return os << account.number << " " << account.surname << " " << account.name << " " << account.middleName << " "
               << account.balance;
 }
-
-//реализация оператора ввода
-//на вход принимает поток откуда вводится аккаунт,
 
 /**
  * Реализация потока ввода
